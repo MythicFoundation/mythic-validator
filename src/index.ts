@@ -9,6 +9,7 @@ import { accountsRoutes } from "./routes/accounts";
 import { tokensRoutes } from "./routes/tokens";
 import { programsRoutes } from "./routes/programs";
 import { bridgeRoutes } from "./routes/bridge";
+import { aliasRoutes } from "./routes/aliases";
 
 async function main() {
   const app = Fastify({
@@ -32,19 +33,26 @@ async function main() {
   await app.register(tokensRoutes);
   await app.register(programsRoutes);
   await app.register(bridgeRoutes);
+  await app.register(aliasRoutes);
 
   // Root redirect
   app.get("/", async (_req, reply) => {
     return reply.send({
       name: "Mythic L2 Explorer API",
-      version: "1.0.0",
+      version: "1.1.0",
       endpoints: [
         "/health",
         "/stats",
+        "/supply",
+        "/blocks",
+        "/blocks/:slot",
         "/slots",
         "/slot/:slot",
         "/transactions",
+        "/transactions/:signature",
         "/tx/:signature",
+        "/accounts/:address",
+        "/accounts/:address/transactions",
         "/account/:address",
         "/account/:address/transactions",
         "/tokens",

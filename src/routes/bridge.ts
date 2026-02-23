@@ -8,7 +8,7 @@ const BRIDGE_L2 = new PublicKey(
 );
 
 interface BridgeStats {
-  totalLocked: { SOL: number; MYTH: number; USDC: number };
+  totalLocked: { MYTH: number; USDC: number };
   totalBridged24h: number;
   pendingWithdrawals: number;
 }
@@ -30,13 +30,13 @@ export async function bridgeRoutes(app: FastifyInstance) {
 
     try {
       // Get bridge program accounts to compute locked values
-      let totalLocked = { SOL: 0, MYTH: 0, USDC: 0 };
+      let totalLocked = { MYTH: 0, USDC: 0 };
       let pendingWithdrawals = 0;
 
       try {
         const bridgeAccounts = await connection.getProgramAccounts(BRIDGE_L2);
         for (const acct of bridgeAccounts) {
-          totalLocked.SOL += acct.account.lamports / 1e9;
+          totalLocked.MYTH += acct.account.lamports / 1e9;
         }
       } catch {
         // Bridge may not be deployed
@@ -87,7 +87,7 @@ export async function bridgeRoutes(app: FastifyInstance) {
 
       const txs: BridgeTx[] = sigs.map((sig) => ({
         type: "deposit" as const, // Would need to parse instruction data for real type
-        asset: "SOL",
+        asset: "MYTH",
         amount: 0,
         status: sig.err ? "failed" : "confirmed",
         l1Tx: null,
