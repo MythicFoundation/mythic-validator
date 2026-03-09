@@ -1,0 +1,32 @@
+Business Source License 1.1
+
+License text copyright (c) 2017 MariaDB Corporation Ab, All Rights Reserved.
+"Business Source License" is a trademark of MariaDB Corporation Ab.
+
+Parameters
+
+Licensor:             Mythic Foundation
+Licensed Work:        Mythic Validator Software
+                      The Licensed Work is (c) 2025-2026 Mythic Foundation.
+Additional Use Grant: You may make production use of the Licensed Work, provided
+                      your use does not include offering the Licensed Work to third
+                      parties as a hosted or managed service, where the service
+                      provides users with access to any substantial set of the
+                      features or functionality of the Licensed Work.
+Change Date:          February 1, 2028
+Change License:       MIT License
+
+For information about alternative licensing arrangements for the Licensed Work,
+please contact: legal@mythic.foundation
+
+Notice
+
+Business Source License 1.1 (BUSL-1.1)
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
