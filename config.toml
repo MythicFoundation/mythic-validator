@@ -2,7 +2,7 @@
 # Mythic L2 Firedancer Config -- Validator Tier
 # Requirements: 32+ cores, 128GB RAM, 2TB NVMe
 # Role: Full validator with RPC + transaction history
-# Install: curl -sSf mythic.sh/install | sudo bash
+# Install: curl -sSfL mythic.sh/install | sudo bash
 # ============================================================================
 
 name = "mythic-l2-validator"
