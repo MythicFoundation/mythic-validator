@@ -20,7 +20,7 @@
 One command to install and configure a Mythic validator:
 
 ```bash
-curl -sSf mythic.sh/install | sudo bash
+curl -sSfL mythic.sh/install | sudo bash
 ```
 
 The installer auto-detects your hardware and selects the appropriate tier:
@@ -116,7 +116,7 @@ solana validators --url https://rpc.mythic.sh
 Install the Mythic CLI for easy management:
 
 ```bash
-curl -sSf mythic.sh/cli | bash
+curl -sSfL mythic.sh/cli | bash
 ```
 
 Then:
