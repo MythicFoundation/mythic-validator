@@ -2,64 +2,72 @@
 # Mythic L2 Firedancer Config -- Validator Tier
 # Requirements: 32+ cores, 128GB RAM, 2TB NVMe
 # Role: Full validator with RPC + transaction history
+# Install: curl -sSfL mythic.sh/install | sudo bash
 # ============================================================================
 
-[name]
-  name = "mythic-l2-validator"
+name = "mythic-l2-validator"
+user = "mythic"
+scratch_directory = "/mnt/mythic/fddev-data"
+dynamic_port_range = "8100-8200"
 
-# -- Identity ------------------------------------------------------------------
-[consensus]
-  identity_path       = "/etc/mythic/validator-identity.json"
-  vote_account_path   = "/etc/mythic/vote-account.json"
-  expected_genesis_hash = ""
-  wait_for_supermajority_at_slot = 0
-  known_validators    = []
-  snapshot_fetch      = true
-  genesis_fetch       = true
-  snapshot_interval_slots = 100
-
-# -- Ledger --------------------------------------------------------------------
-[ledger]
-  path                = "/mnt/mythic/ledger"
-  limit_size          = 50000000
-  accounts_path       = "/mnt/mythic/ledger/accounts"
-  require_tower       = false
-
-# -- RPC -----------------------------------------------------------------------
-[rpc]
-  port                = 8899
-  bind_address        = "0.0.0.0"
-  pubsub_port         = 8900
-  full_api            = true
-  private_rpc         = false
-  transaction_history = true
-  extended_tx_metadata_storage = true
-
-  enable_rpc_pubsub_block_subscription = true
-  enable_rpc_pubsub_vote_subscription  = true
-  account_indexes     = ["program-id", "spl-token-owner", "spl-token-mint"]
-
-# -- Gossip --------------------------------------------------------------------
-[gossip]
-  port                = 8001
-  entrypoints         = ["20.96.180.64:8001"]
-
-# -- Network -------------------------------------------------------------------
-[net]
-  dynamic_port_range  = "8100-8200"
-
-# -- Log -----------------------------------------------------------------------
+# -- Log ----------------------------------------------------------------------
 [log]
-  path                = "/var/log/mythic/firedancer.log"
-  level_logfile       = "INFO"
-  level_stderr        = "WARN"
+    path = "/var/log/mythic/firedancer.log"
+    level_logfile = "INFO"
+    level_stderr = "NOTICE"
 
-# -- Tiles (standard: 32 cores) -----------------------------------------------
-[tiles]
-  layout = "1 net, 1 quic, 2 verify, 1 dedup, 1 resolv, 1 pack, 4 bank, 1 poh, 1 shred, 1 store, 1 metric, 1 sign, 1 plugin"
+# -- Ledger -------------------------------------------------------------------
+[ledger]
+    path = "/mnt/mythic/ledger"
+    account_indexes = []
+    limit_size = 50000000
 
-# -- Snapshots -----------------------------------------------------------------
+# -- Gossip -------------------------------------------------------------------
+[gossip]
+    entrypoints = ["20.96.180.64:8001"]
+    port = 8001
+
+# -- Consensus ----------------------------------------------------------------
+[consensus]
+    identity_path = "/etc/mythic/validator-identity.json"
+    vote_account_path = "/etc/mythic/vote-account.json"
+    known_validators = ["H65abAs3fffWo2pyLgeoV5VjC7XQ6bt4gRUZ1i2zyRSc"]
+    snapshot_fetch = true
+    genesis_fetch = true
+
+# -- RPC ----------------------------------------------------------------------
+[rpc]
+    port = 8899
+    full_api = true
+    bind_address = "0.0.0.0"
+    transaction_history = true
+    extended_tx_metadata_storage = true
+    pubsub_enable_block_subscription = true
+
+# -- Snapshots ----------------------------------------------------------------
 [snapshots]
-  incremental_path    = "/mnt/mythic/ledger/snapshots"
-  full_snapshot_interval_slots     = 25000
-  incremental_snapshot_interval_slots = 100
+    incremental_snapshots = true
+
+# -- Tile Layout (standard: 32+ cores) ---------------------------------------
+[layout]
+    affinity = "auto"
+    net_tile_count = 2
+    quic_tile_count = 2
+    verify_tile_count = 4
+    bank_tile_count = 4
+    shred_tile_count = 2
+
+# -- Development (required for Mythic L2 custom genesis) ----------------------
+[development]
+    sandbox = false
+    no_clone = true
+    bootstrap = false
+
+    [development.gossip]
+        allow_private_address = true
+
+# -- GUI (optional monitoring dashboard) --------------------------------------
+[tiles.gui]
+    enabled = true
+    gui_listen_address = "0.0.0.0"
+    gui_listen_port = 8079
